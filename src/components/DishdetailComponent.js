@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from 'reactstrap';
+import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
 
 class Dishdetail extends Component{
     constructor(props){
@@ -10,8 +10,8 @@ class Dishdetail extends Component{
         if(dish != null){
             return (
                 <CardBody>
-                    <CardTitle>{this.props.dishSelected.name}</CardTitle>
-                    <CardText>{this.props.dishSelected.description}</CardText>
+                    <CardTitle>{this.props.dish.name}</CardTitle>
+                    <CardText>{this.props.dish.description}</CardText>
                 </CardBody>
             )
         }
@@ -53,19 +53,22 @@ class Dishdetail extends Component{
     }
 
     render(){
-        if(this.props.dishSelected != null){
+        if(this.props.dish != null){
             return (
-                <div className="row">
-                    <div className="col-xs-12 col-sm-12 col-md-5 m-1">
-                        <Card>
-                            <CardImg width="100%" object src={this.props.dishSelected.image} alt={this.props.dishSelected.name} />
-                            {this.renderDish(this.props.dishSelected)}
-                        </Card>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xs-12 col-sm-12 col-md-5 m-1">
+                            <Card>
+                                <CardImg width="100%" object src={this.props.dish.image} alt={this.props.dish.name} />
+                                {this.renderDish(this.props.dish)}
+                            </Card>
+                        </div>
+                        <div>
+                            {this.renderComments(this.props.dish.comments)}
+                        </div>                    
                     </div>
-                    <div>
-                        {this.renderComments(this.props.dishSelected.comments)}
-                    </div>                    
                 </div>
+                
             )
         }else{
             return (
