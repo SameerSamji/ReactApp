@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
 
-class Dishdetail extends Component{
-    constructor(props){
-        super(props)
-    }
-
-    renderDish(dish){
+    function RenderDish({dish}){
         if(dish != null){
             return (
                 <CardBody>
-                    <CardTitle>{this.props.dish.name}</CardTitle>
-                    <CardText>{this.props.dish.description}</CardText>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
                 </CardBody>
             )
         }
@@ -22,7 +17,7 @@ class Dishdetail extends Component{
         }
     }
 
-    renderComments(commentsArray){
+    function RenderComments({commentsArray}){
         var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
         if(commentsArray.length > 0){
             const comm = commentsArray.map((com) => {
@@ -52,19 +47,19 @@ class Dishdetail extends Component{
         
     }
 
-    render(){
-        if(this.props.dish != null){
+    const Dishdetail = (props) => {
+        if(props.dish != null){
             return (
                 <div className="container">
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-5 m-1">
                             <Card>
-                                <CardImg width="100%" object src={this.props.dish.image} alt={this.props.dish.name} />
-                                {this.renderDish(this.props.dish)}
+                                <CardImg width="100%" object src={props.dish.image} alt={props.dish.name} />
+                                <RenderDish dish={props.dish} />
                             </Card>
                         </div>
                         <div>
-                            {this.renderComments(this.props.dish.comments)}
+                            <RenderComments commentsArray={props.dish.comments} />
                         </div>                    
                     </div>
                 </div>
@@ -76,6 +71,5 @@ class Dishdetail extends Component{
             )
         }
     }
-}
 
 export default Dishdetail;
